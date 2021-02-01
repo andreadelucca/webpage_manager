@@ -16,11 +16,8 @@
 
     date_default_timezone_set('America/Manaus');
 
-    global $appTitle;
-    global $pageTitle;
-
-    $pageTitle = 'Painel de Controle | LUBNORTE Amazonas';
-    $appTitle = 'Image and Website Manager v1.0';
+    $pageTitle = 'Webpage Manager v1';
+    $appTitle = 'Webpage Manager v1';
     $databaseHost = 'localhost';
     $databaseUser = 'root';
     $databasePass = '0000';
