@@ -17,6 +17,15 @@ function sendLoginRequest($username, $usersurname, $userlogin, $userpassword, $i
     return mysqli_insert_id($connection);
 }
 
+function newLoginUser($username, $usersurname, $userlogin, $userpassword, $idprofile) {
+    global $connection;
+
+    $sqlString = "INSERT INTO ln_website.ln_users VALUES(null, '$username', '$usersurname', '$userlogin', '$userpassword', 'APROVADO','ATIVO', $idprofile);";
+    $resultset = mysqli_query($connection, $sqlString) or die("Erro ao processar dados: " . mysqli_error($connection));
+
+    return mysqli_insert_id($connection);
+}
+
 /*
  * Other functions
  *

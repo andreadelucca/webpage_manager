@@ -45,8 +45,8 @@
 
     # Database processing form
     if ($errors == 0) {
-        $newProfileSolicitation = sendLoginRequest($username, $usersurname, $userlogin, $userPasswordHash, $userloginprofile);
-        if($newProfileSolicitation > 0) {
+        $newProfile = sendLoginRequest($username, $usersurname, $userlogin, $userPasswordHash, $userloginprofile);
+        if($newProfile > 0) {
 
             $messageAlertSuccess = style_alerts('success','Enviado com Sucesso!', 'Aguarde até que um responsável administrador autorize seu acesso', 'Caso a demora seja maior que o previsto, entre em contato com o Suporte');
             $messageAlertError = '';
@@ -56,13 +56,14 @@
             $return['messageAlertError'] = $messageAlertError;
         } else {
             $return['return_json'] = 0;
-            $messageAlertSuccess = '';
+            $return['messageAlertSuccess'] = '';
+
             $messageAlertError = style_alerts('danger', 'Erro ao informar dados', 'Houve um erro ao processar sua requisição dentro do sistema.', 'Contate o administrador do sistema ou entre em contato com o suporte para mais detalhes.');
             $return['messageAlertError'] = $messageAlertError;
         }
     } else {
         $return['return_json'] = 0;
-        $messageAlertSuccess = '';
+        $return['messageAlertSuccess'] = '';
         $return['messageAlertError'] = $messageAlertError;
     }
 

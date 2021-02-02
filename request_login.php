@@ -113,15 +113,15 @@
             },
             fail: function () {
                 $('#message-success-error').html(
-                    '<div class="alert alert-warning alert-dismissible fade show" role="alert">\n' +
-                    '<h4 class="alert-heading">Ooops...</h4>\n' +
-                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
-                    '<span aria-hidden="true">&times;</span>\n' +
-                    '</button>\n' +
-                    '<p>A solicitação não pode ser atendida no momento. Pode ser devido a um problema de rede ou de configuração no sistema. Ou no envio dos dados.</p>\n' +
-                    '<hr>\n' +
-                    '<p class="mb-0">Caso o erro persista, mande uma mensagem para o desenvolvedor <a href="mailto:andrelucas.batista@outlook.com">aqui</a>.</p>\n' +
-                    '</div>'
+                        '<div class="alert alert-warning alert-dismissible fade show" role="alert">\n' +
+                        '<h4 class="alert-heading">Ooops...</h4>\n' +
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                        '<span aria-hidden="true">&times;</span>\n' +
+                        '</button>\n' +
+                        '<p>A solicitação não pode ser atendida no momento. Pode ser devido a um problema de rede ou de configuração no sistema. Ou no envio dos dados.</p>\n' +
+                        '<hr>\n' +
+                        '<p class="mb-0">Caso o erro persista, mande uma mensagem para o desenvolvedor <a href="mailto:andrelucas.batista@outlook.com">aqui</a>.</p>\n' +
+                        '</div>'
                 );
             }
         });
