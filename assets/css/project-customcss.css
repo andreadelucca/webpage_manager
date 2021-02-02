@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+.li-spaces {
+    padding-left: 15px;
+    padding-right: 15px;
+    font-size: 18px;
+}
+
+.font-structure {
+    font-family: 'Fira Sans', sans-serif;
+}

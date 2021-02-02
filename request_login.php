@@ -1,4 +1,4 @@
-<?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/config.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . '/inc/config.php'; global $githubLink; global $pageTitle; ?>
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -67,7 +67,7 @@
     <footer class="d-flex justify-content-center">
         <p class="mt-5 mb-3 text-muted" style="font-size: smaller;">&copy; <?php echo date('Y'); ?> - Webpage Manager
             v1. Open source project. See the code
-            <a href="https://github.com/andreadelucca/lubnorte2" target="_blank">here</a>!</p>
+            <a href="<?php echo $githubLink; ?>" target="_blank">here</a>!</p>
     </footer>
 
 </div>

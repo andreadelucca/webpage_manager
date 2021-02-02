@@ -13,7 +13,6 @@
         ini_set('display_errors', 'Off');
         error_reporting(0);
     }
-
     date_default_timezone_set('America/Manaus');
 
     $pageTitle = 'Webpage Manager v1';
@@ -23,6 +22,7 @@
     $databasePass = '0000';
     $databaseName = 'ln_website';
     $databasePort = 3307;
+    $githubLink = "https://github.com/andreadelucca/webpage_manager";
 
     $connection = mysqli_connect($databaseHost, $databaseUser, $databasePass, $databaseName, $databasePort);
     $selectDatabase = mysqli_select_db($connection, $databaseName);
