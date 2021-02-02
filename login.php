@@ -1,5 +1,5 @@
 <?php
-    include $_SERVER['DOCUMENT_ROOT'] . '/inc/config.php';
+    include $_SERVER['DOCUMENT_ROOT'] . "/inc/config.php";
     global $pageTitle;
 ?>
 <!doctype html>
@@ -16,19 +16,23 @@
 </head>
 <body>
 <div class="container">
+    <div id="login_success_error">
+
+    </div>
+
     <h1 class="display-4">Acesso aos Sistemas</h1>
     <hr class="my-4">
     <h4 style="font-weight: 200; line-height: 1.2;">Antes de continuar, faça o login</h4>
     <br>
-    <form>
+    <form id="formLoginUser">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="username">Nome de Usuário</label>
                 <input type="text" class="form-control" id="user_name" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="usersurname">Senha de Acesso</label>
-                <input type="password" class="form-control" id="user_surname" required>
+                <label for="userpassword">Senha de Acesso</label>
+                <input type="password" class="form-control" id="user_password" required>
             </div>
         </div>
         <div class="form-row">
@@ -38,7 +42,7 @@
                 </div>
             </div>
             <div class="form-group col-md-12 d-flex justify-content-center">
-                <button type="submit" id="sendLoginData" class="btn btn-success">Acessar</button>
+                <button type="button" id="sendLoginData" class="btn btn-success" onclick="validateUser();">Acessar</button>
             </div>
         </div>
     </form>
@@ -52,5 +56,27 @@
 <script src="assets/js/jquery-3.5.1.min.js"></script>
 <script src="https://unpkg.com/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
+
+<script>
+    const validateUser = () => {
+        let username = $('#user_name').val();
+        let userpassword = $('#user_password').val();
+
+        $.post('run/validate_user.php', {
+           username: username,
+           userpassword: userpassword
+        }, function(form_data) {
+            console.log(form_data);
+            let data = JSON.parse(form_data);
+            if(data.return_json == 1) {
+                let url = data.url;
+                $('#login_success_error').html(data.message);
+                location.replace(url);
+            } else {
+                $('#login_success_error').html(data.message);
+            }
+        });
+    }
+</script>
 </body>
 </html>

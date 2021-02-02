@@ -16,6 +16,12 @@
     $userpassword = $_POST['userpassword'];
     $userloginprofile = $_POST['userloginprofile'];
 
+    # Encrypting password - For security reasons
+    $options = array (
+        "cost" => 10
+    );
+    $userPasswordHash = password_hash($userpassword, PASSWORD_DEFAULT, $options);
+
     # Form validation for null data or wrong options
     if(strlen($username) == 0 && strlen($usersurname) == 0 && strlen($userlogin) == 0 && strlen($userpassword) == 0 && $userloginprofile == 'undefined' || $userloginprofile == '') {
         $errors++;
@@ -39,7 +45,7 @@
 
     # Database processing form
     if ($errors == 0) {
-        $newProfileSolicitation = sendLoginRequest($username, $usersurname, $userlogin, $userpassword, $userloginprofile);
+        $newProfileSolicitation = sendLoginRequest($username, $usersurname, $userlogin, $userPasswordHash, $userloginprofile);
         if($newProfileSolicitation > 0) {
 
             $messageAlertSuccess = style_alerts('success','Enviado com Sucesso!', 'Aguarde até que um responsável administrador autorize seu acesso', 'Caso a demora seja maior que o previsto, entre em contato com o Suporte');

@@ -17,7 +17,6 @@ function sendLoginRequest($username, $usersurname, $userlogin, $userpassword, $i
     return mysqli_insert_id($connection);
 }
 
-
 /*
  * Other functions
  *
