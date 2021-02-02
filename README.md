@@ -12,7 +12,7 @@ The project was built using the following technologies:
 
 Furthermore, we'll convert the entire project to use VueJS and NodeJS, with PostgreSQL or Oracle databases
 
-Sinta-se livre para me doar uma pequena contribuição ;)
-- Conta Nubank: chaves Pix: (92) 98127-7936 e dkdroidroot27@gmail.com
+Feel free to give me a donate ;)
+- Nubank Account: Pix keys: (92) 98127-7936 and dkdroidroot27@gmail.com
    
-Agradeço quem puder me ajudar ;)
+Thanks for those ones who wants to help ;)
