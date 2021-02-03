@@ -12,7 +12,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown_users" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Usuários</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown10">
                     <a class="dropdown-item" href="new-user.php">Cadastrar Usuários</a>
-                    <a class="dropdown-item" href="#">Gerenciar Usuários</a>
+                    <a class="dropdown-item" href="manage-users.php">Gerenciar Usuários</a>
                     <a class="dropdown-item" href="#">Autorizar Usuários</a>
                 </div>
             </li>
@@ -36,7 +36,7 @@
                 <a class="nav-link" href="#">Alterar Minha Senha</a>
             </li>
             <li class="nav-item li-spaces">
-                <a class="nav-link" href="#">Sair (Logado como <?php echo $_SESSION['user_name']; ?> )</a>
+                <a class="nav-link" href="logout.php">Sair (Logado como <?php echo $_SESSION['user_name']; ?> )</a>
             </li>
         </ul>
     </div>

@@ -1,6 +1,6 @@
 <?php
 
-    include $_SERVER['DOCUMENT_ROOT'] . '/inc/config.php';
+    //include $_SERVER['DOCUMENT_ROOT'] . '/inc/config.php';
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/main_functions.php';
     include $_SERVER['DOCUMENT_ROOT'] . '/inc/data_functions.php';
 
@@ -24,7 +24,7 @@
     $userPasswordHash = password_hash($userpass, PASSWORD_DEFAULT, $options);
 
     # Treating data - for error or success messages
-    if (strlen($username) == 0 && strlen($usersurname) == 0 && strlen($userlogin) == 0 && strlen($userpass) == 0 && strlen($userpass2) == 0 && $useraccessprofile == 'undefined' && $useraccessprofile = '') {
+    if (strlen($username) == 0 && strlen($usersurname) == 0 && strlen($userlogin) == 0 && strlen($userpass) == 0 && strlen($userpass2) == 0 && ($useraccessprofile == 'undefined' || $useraccessprofile = '' || $useraccessprofile == 0)) {
         $errors++;
         $messageAlertError = style_short_alerts('danger', 'Erro ao inserir dados!', 'Todos os campos são obrigatórios. Preencha-os adequadamente!');
         $messageAlertSuccess = '';

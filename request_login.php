@@ -10,8 +10,9 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/login-page.css">
     <link rel="stylesheet" href="assets/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/project-customcss.css">
 </head>
-<body>
+<body class="font-structure">
 
 <div class="container">
     <!-- Message of success or error -->

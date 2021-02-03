@@ -12,7 +12,7 @@ function sendLoginRequest($username, $usersurname, $userlogin, $userpassword, $i
     global $connection;
 
     $sqlString = "INSERT INTO ln_website.ln_users VALUES(null, '$username', '$usersurname', '$userlogin', '$userpassword', 'SOLICITADO','INATIVO', $idprofile)";
-    $resultset = mysqli_query($connection, $sqlString) or die("Erro ao processar dados: " . mysqli_error($connection));
+    $resultset = mysqli_query($connection, $sqlString) or die("Error while processing data: " . mysqli_error($connection));
 
     return mysqli_insert_id($connection);
 }
@@ -21,13 +21,93 @@ function newLoginUser($username, $usersurname, $userlogin, $userpassword, $idpro
     global $connection;
 
     $sqlString = "INSERT INTO ln_website.ln_users VALUES(null, '$username', '$usersurname', '$userlogin', '$userpassword', 'APROVADO','ATIVO', $idprofile);";
-    $resultset = mysqli_query($connection, $sqlString) or die("Erro ao processar dados: " . mysqli_error($connection));
+    $resultset = mysqli_query($connection, $sqlString) or die("Error while processing data: " . mysqli_error($connection));
 
     return mysqli_insert_id($connection);
 }
 
-/*
- * Other functions
- *
- *
- */
+function listAllActiveUsers() {
+    global $connection;
+    $tableData = '';
+
+    $sqlQuery = "select * from ln_users, ln_userprofile where id_profile = id_userprofile and status_user = 'ATIVO';";
+    $resultset = mysqli_query($connection, $sqlQuery) or die("Error while processing data: " . mysqli_error());
+    $rowCount = mysqli_num_rows($resultset);
+
+    if($rowCount > 0) {
+        while ($dataList = mysqli_fetch_array($resultset)) {
+            $idUsers = $dataList['id_users'];
+            $userName = $dataList['user_name'];
+            $userSurname = $dataList['user_surname'];
+            $userLogin = $dataList['user_login'];
+            $userPass = $dataList['user_pass'];
+            $requestStatus = $dataList['request_status'];
+            $statusUser = $dataList['status_user'];
+            $idProfile = $dataList['id_profile'];
+            $idUserProfile = $dataList['id_userprofile'];
+            $descProfile = $dataList['desc_profile'];
+            $homePath = $dataList['home_path'];
+            $profilePath = $dataList['profile_path'];
+            $navbarName = $dataList['navbar_name'];
+
+            $tableLine = "
+                <tr>
+                    <th scope='row'>". $idUsers ."</th>
+                    <td>" . $userName . "</td>
+                    <td>" . $userSurname . "</td>
+                    <td>" . $userLogin . "</td>
+                    <td>" . $requestStatus . "</td>
+                    <td>" . $statusUser . "</td>
+                    <td>" . $descProfile . "</td>
+                    <td><a href='javascript:void(0)' class='btn btn-success' onclick='callDataModal(" . $idUsers . ");'>Detalhes</a></td>
+                </tr>
+            ";
+
+            $tableData = $tableData . $tableLine;
+
+            $table = "
+                <table class='table table-striped table-bordered table-responsive-xl nowrap' id='table-list-users' style='width: 100%;'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>ID</th>
+                            <th scope='col'>Nome</th>
+                            <th scope='col'>Sobrenome</th>
+                            <th scope='col'>Login de Acesso</th>
+                            <th scope='col'>Status de Acesso</th>
+                            <th scope='col'>Status de Usuário</th>
+                            <th scope='col'>Perfil de Acesso</th>
+                            <th scope='col'>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        " . $tableData . "
+                    </tbody>
+                </table>
+            ";
+        }
+    } else {
+        return $table = "
+            <table class='table table-striped table-bordered table-responsive-xl nowrap' id='table-list-users' style='width: 100%;'>
+                    <thead>
+                        <tr>
+                            <th scope='col'>ID</th>
+                            <th scope='col'>Nome de Usuário</th>
+                            <th scope='col'>Sobrenome</th>
+                            <th scope='col'>Login de Acesso</th>
+                            <th scope='col'>Status de Acesso</th>
+                            <th scope='col'>Status de Usuário</th>
+                            <th scope='col'>Perfil de Acesso</th>
+                            <th scope='col'>Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan='8' align='center'>Nenhum dado a exibir</td>
+                        </tr>
+                    </tbody>
+                </table>
+        ";
+    }
+
+    return $table;
+}

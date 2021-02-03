@@ -13,9 +13,10 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/login-page.css">
     <link rel="stylesheet" href="assets/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/project-customcss.css">
     <title>Login | <?php echo $pageTitle; ?></title>
 </head>
-<body>
+<body class="font-structure">
 <div class="container">
     <div id="login_success_error">
 
