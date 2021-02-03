@@ -10,6 +10,8 @@ The project was built using the following technologies:
 - Font Awesome, version 5.15.2
 - Highcharts, version 9.0.0;
 
+Based on the most spetacular, fantastic, awesome framework that i call "Laradino" 
+
 Furthermore, we'll convert the entire project to use VueJS and NodeJS, with PostgreSQL or Oracle databases
 
 Feel free to give me a donate ;)
