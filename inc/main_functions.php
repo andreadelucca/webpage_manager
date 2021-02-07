@@ -5,7 +5,7 @@ function style_alerts($alertColor, $mainTitle, $mainMessage, $underMessage) {
     $message = '
         <div class="alert alert-' . $alertColor . ' alert-dismissible fade show" role="alert">
            <h4 class="alert-heading">' . $mainTitle . '</h4>
-           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="closeMessages">
                <span aria-hidden="true">&times;</span>
            </button>
            <p>' . $mainMessage . '</p>
@@ -21,7 +21,7 @@ function style_short_alerts($alertColor, $errorTitle, $mainMessage) {
     $message = '
         <div class="alert alert-' . $alertColor . ' alert-dismissible fade show" role="alert">
           <strong>' . $errorTitle . '</strong> ' . $mainMessage . '
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="closeMessages">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>

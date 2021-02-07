@@ -52,23 +52,67 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
 
     <!-- Modal Section -->
     <div class="modal fade" id="modalUpdateUser" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Detalhes do Usuário</h5>
+                    <h4 class="modal-title" id="staticBackdropLabel">Detalhes do Usuário</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <h6>Preencha os campos para continuar. Para sair da janela, toque no ícone "x"</h6>
+                    <br>
+                    <form id="formUserDataUpdate">
+                        <input type="hidden" name="valueIduser">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="valueUsername">Nome *</label>
+                                <input type="text" class="form-control" id="valueUsername">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="valueUsersurname">Sobrenome *</label>
+                                <input type="text" class="form-control" id="valueUsersurname">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="valueUserlogin">Login *</label>
+                            <input type="text" class="form-control" id="valueUserlogin" autocomplete="username">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="valueUserpass">Senha *</label>
+                                    <input type="password" class="form-control" id="valueUserpass" autocomplete="new-password">
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label for="valueUserpass2">Repita a Senha *</label>
+                                    <input type="password" class="form-control" id="valueUserpass2" autocomplete="new-password">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="valueUserAccessProfile">Perfil de Acesso *</label>
+                                <select id="valueUserAccessProfile" class="form-control">
+                                    <option value="undefined" selected>Escolha um perfil</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Usuário</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <div id="div_message_return">
-
-                    </div>
+                        <br>
+                        <div class="d-flex justify-content-center">
+                            <button type="button" class="btn btn-success" id="buttonSubmitForm" onclick="updateUserInfo();">Salvar Dados</button>&nbsp;
+                            <button type="button" class="btn btn-warning" id="buttonClearForm" onclick="resetFormulary();">Limpar Formulário</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Atualizar Dados</button>
+                <div class="div_message_return">
+
                 </div>
             </div>
         </div>
@@ -87,7 +131,7 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="message-management-users">
+                <div id="message-management-users">
 
                 </div>
             </div>
@@ -165,7 +209,7 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
                         $('#valueUsersurname').val(contentData.usersurname);
                         $('#valueUserlogin').val(contentData.userlogin);
                         $('#valueUserpass').val(contentData.userpass);
-                        $('#valueAccessprofile').val(contentData.useraccessprofile);
+                        $('#valueUserAccessprofile').val(contentData.useraccessprofile);
                     } else {
                         $('#div_message_return').html(contentData.message);
                     }
@@ -173,20 +217,117 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
             })
         }
 
-        const deactivateUser = (idUser) => {
-            alert('Desativado');
-        }
-
         const activateUser = (idUser) => {
-            alert('Ativado');
+            $.post('../../run/manage_updates_user.php', {
+                idUser: idUser,
+                message: 'ACTIVATE_USER'
+            }, function(data) {
+                console.log(data);
+                let values = JSON.parse(data);
+                if(values.return === 1) {
+                    $('#message-management-users').html(values.messageSuccess);
+                    setTimeout(function(){
+                        location.reload();
+                    }, 4000);
+                } else {
+                    $('#message-management-users').html(values.messageError);
+                }
+            });
         }
 
-        const unauthorizeUser = (idUser) => {
-            alert('Desautorizado');
+        const deactivateUser = (idUser) => {
+            $.post('../../run/manage_updates_user.php', {
+                idUser: idUser,
+                message: 'DEACTIVATE_USER'
+            }, function(data) {
+                console.log(data);
+                let values = JSON.parse(data);
+                if(values.return === 1) {
+                    $('#message-management-users').html(values.messageSuccess);
+                    setTimeout(function(){
+                        location.reload();
+                    }, 4000);
+                } else {
+                    $('#message-management-users').html(values.messageError);
+                }
+            });
         }
 
         const authorizeUser = (idUser) => {
-            alert('Autorizado');
+            $.post('../../run/manage_updates_user.php', {
+                idUser: idUser,
+                message: 'AUTHORIZE_USER'
+            }, function(data) {
+                console.log(data);
+                let values = JSON.parse(data);
+                if(values.return === 1) {
+                    $('#message-management-users').html(values.messageSuccess);
+                    setTimeout(function(){
+                        location.reload();
+                    }, 4000);
+                } else {
+                    $('#message-management-users').html(values.messageError);
+                }
+            });
+        }
+
+        const unauthorizeUser = (idUser) => {
+            $.post('../../run/manage_updates_user.php', {
+                idUser: idUser,
+                message: 'UNAUTHORIZE_USER'
+            }, function(data) {
+                console.log(data);
+                let values = JSON.parse(data);
+                if(values.return === 1) {
+                    $('#message-management-users').html(values.messageSuccess);
+                    setTimeout(function(){
+                        location.reload();
+                    }, 4000);
+                } else {
+                    $('#message-management-users').html(values.messageError);
+                }
+            });
+        }
+
+        const updateUserInfo = () => {
+            let username = $('#valueUsername').val();
+            let usersurname = $('#valueUsersurname').val();
+            let userlogin = $('#valueUserlogin').val();
+            let userpassword = $('#valueUserpass').val();
+            let userpassword2 = $('#valueUserpass2').val();
+            let useraccessprofile = $('#valueUserAccessprofile').val();
+
+            let processFile = '../../run/update_user_data.php';
+
+            let form_data = new FormData();
+            form_data.append('username', username);
+            form_data.append('usersurname', usersurname);
+            form_data.append('userlogin', userlogin);
+            form_data.append('userpassword', userpassword);
+            form_data.append('userpassword2', userpassword2);
+            form_data.append('useraccessprofile', useraccessprofile);
+
+            $.ajax({
+                url: processFile,
+                data: form_data,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    console.log(data);
+                    let values = JSON.parse(data);
+                    if (values.return === 1) {
+                        $('#div_message_return').html(values.message);
+                        location.reload();
+                    } else {
+                        $('#div_message_return').html(values.message);
+                    }
+                }
+            });
+        }
+
+        const resetFormulary = () => {
+            document.getElementById("formUserDataUpdate").reset();
         }
 
     </script>

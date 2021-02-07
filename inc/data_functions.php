@@ -45,62 +45,62 @@ function listAllActiveUsers() {
             $navbarName = $dataList['navbar_name'];
 
             if($statusUser == 'ATIVO') {
-                $btnOptionAccess = "<a class='dropdown-item' href='javascript:void(0)' onclick='deactivateUser(" . $idUsers . ");'>Desativar Usuário</a>";
+                $btnOptionAccess = '<a class="dropdown-item" href="javascript:void(0)" onclick="deactivateUser(' . $idUsers . ');">Desativar Usuário</a>';
             } else {
-                $btnOptionAccess = "<a class='dropdown-item' href='javascript:void(0)' onclick='activateUser(" . $idUsers . ");'>Ativar Usuário</a>";
+                $btnOptionAccess = '<a class="dropdown-item" href="javascript:void(0)" onclick="activateUser(' . $idUsers . ');">Ativar Usuário</a>';
             }
 
             if($requestStatus == 'SOLICITADO') {
-                $btnUpdatePermissions = "<a class='dropdown-item' href='javascript:void(0)' onclick='authorizeUser(" . $idUsers . ");'>Autorizar Usuário</a>";
+                $btnUpdatePermissions = '<a class="dropdown-item" href="javascript:void(0)" onclick="authorizeUser(' . $idUsers . ');">Autorizar Usuário</a>';
             } else {
-                $btnUpdatePermissions = "<a class='dropdown-item' href='javascript:void(0)' onclick='unauthorizeUser(" . $idUsers . ");'>Desautorizar Usuário</a>";
+                $btnUpdatePermissions = '<a class="dropdown-item" href="javascript:void(0)" onclick="unauthorizeUser(' . $idUsers . ');">Desautorizar Usuário</a>';
             }
 
-            $tableLine = "
+            $tableLine = '
                 <tr>
-                    <th scope='row'>". $idUsers ."</th>
-                    <td>" . $userName . "</td>
-                    <td>" . $userSurname . "</td>
-                    <td>" . $userLogin . "</td>
-                    <td>" . $requestStatus . "</td>
-                    <td>" . $statusUser . "</td>
-                    <td>" . $descProfile . "</td>
+                    <th scope="row">' . $idUsers . '</th>
+                    <td>' . $userName . '</td>
+                    <td>' . $userSurname . '</td>
+                    <td>' . $userLogin . '</td>
+                    <td>' . $requestStatus . '</td>
+                    <td>' . $statusUser . '</td>
+                    <td>' . $descProfile . '</td>
                     <td>
-                        <div class='btn-group'>
-                            <button type='button' class='btn btn-success dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Opções
                             </button>
-                            <div class='dropdown-menu'>
-                                <a  class='dropdown-item' href='javascript:void(0)' onclick='callDataModal(" . $idUsers . ");'>Atualizar Dados</a>
-                                " . $btnOptionAccess . "
-                                " . $btnUpdatePermissions . " 
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="callDataModal(' . $idUsers . ');">Atualizar Dados</a>
+                                ' . $btnOptionAccess . '
+                                ' . $btnUpdatePermissions . '
                             </div>
                         </div>
                     </td>
                 </tr>
-            ";
+            ';
 
             $tableData = $tableData . $tableLine;
 
-            $table = "
-                <table class='table table-striped table-bordered table-responsive-xl nowrap' id='table-list-users' style='width: 100%;'>
+            $table = '
+                <table class="table table-striped table-bordered table-responsive-xl nowrap" id="table-list-users" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th scope='col'>ID</th>
-                            <th scope='col'>Nome</th>
-                            <th scope='col'>Sobrenome</th>
-                            <th scope='col'>Login</th>
-                            <th scope='col'>Status Acesso</th>
-                            <th scope='col'>Status Usuário</th>
-                            <th scope='col'>Perfil de Acesso</th>
-                            <th scope='col'>Opções</th>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Sobrenome</th>
+                            <th scope="col">Login</th>
+                            <th scope="col">Status Acesso</th>
+                            <th scope="col">Status Usuário</th>
+                            <th scope="col">Perfil de Acesso</th>
+                            <th scope="col">Opções</th>
                         </tr>
                     </thead>
                     <tbody>
-                        " . $tableData . "
+                        ' . $tableData . '
                     </tbody>
                 </table>
-            ";
+            ';
         }
     } else {
         return $table = "
