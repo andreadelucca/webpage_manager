@@ -50,6 +50,31 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
 </head>
 <body class="font-structure">
 
+    <!-- Modal Section -->
+    <div class="modal fade" id="modalUpdateUser" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Detalhes do Usuário</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div id="div_message_return">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Atualizar Dados</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Modal -->
+
     <?php include "../../inc/" . $navbarSystem; ?>
     <br>
 
@@ -61,6 +86,11 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
             <p class="text-justify">Selecione um dos registros na tabela abaixo e escolha o que fazer</p>
         </div>
         <div class="row">
+            <div class="col-md-12">
+                <div class="message-management-users">
+
+                </div>
+            </div>
             <div class="col-md-12">
                 <?php echo listAllActiveUsers(); ?>
             </div>
@@ -75,11 +105,15 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
 
     <script src="../../assets/js/jquery-3.5.1.min.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-    <script src="../../assets/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
 
     <script>
+
+        // -------------------------------------------- Dropdown Code --------------------------------------------------
+
+        $('.dropdown-toggle').dropdown();
 
         // -------------------------------------------- Datatables Script ----------------------------------------------
 
@@ -105,7 +139,55 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
             });
         } );
 
-        // -------------------------------------- End of Datatables Script ----------------------------------------------
+        // -------------------------------------- JavaScript Main Functions --------------------------------------------
+
+        const callDataModal = (idUser) => {
+            $('#formDataUser').trigger("reset");
+            $('#valueIdUser').val(idUser);
+
+            $('#modalUpdateUser').modal("show");
+            let runScript = '../../run/list_selected_user.php';
+            let form_data = new FormData();
+
+            form_data.append('idUser', idUser);
+
+            $.ajax({
+                url: runScript,
+                data: form_data,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    let contentData = JSON.parse(data);
+                    if(contentData.return_json === 1) {
+                        $('#valueIduser').val(contentData.idUser);
+                        $('#valueUsername').val(contentData.username);
+                        $('#valueUsersurname').val(contentData.usersurname);
+                        $('#valueUserlogin').val(contentData.userlogin);
+                        $('#valueUserpass').val(contentData.userpass);
+                        $('#valueAccessprofile').val(contentData.useraccessprofile);
+                    } else {
+                        $('#div_message_return').html(contentData.message);
+                    }
+                }
+            })
+        }
+
+        const deactivateUser = (idUser) => {
+            alert('Desativado');
+        }
+
+        const activateUser = (idUser) => {
+            alert('Ativado');
+        }
+
+        const unauthorizeUser = (idUser) => {
+            alert('Desautorizado');
+        }
+
+        const authorizeUser = (idUser) => {
+            alert('Autorizado');
+        }
 
     </script>
 </body>

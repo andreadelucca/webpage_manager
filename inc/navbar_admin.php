@@ -13,23 +13,13 @@
                 <div class="dropdown-menu" aria-labelledby="dropdown10">
                     <a class="dropdown-item" href="new-user.php">Cadastrar Usuários</a>
                     <a class="dropdown-item" href="manage-users.php">Gerenciar Usuários</a>
-                    <a class="dropdown-item" href="#">Autorizar Usuários</a>
                 </div>
             </li>
             <li class="nav-item li-spaces dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown_public" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publicações</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown10">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-            <li class="nav-item li-spaces dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown_aboutus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Seção "Sobre Nós"</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown10">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#">Realizar Publicação</a>
+                    <a class="dropdown-item" href="#">Analisar Publicações Realizadas</a>
                 </div>
             </li>
             <li class="nav-item li-spaces">

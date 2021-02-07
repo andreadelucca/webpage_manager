@@ -2,12 +2,6 @@
 
 include $_SERVER['DOCUMENT_ROOT'] . '/inc/config.php';
 
-/*
- * Login Functions
- *
- * Functions to create login, authorize login, validate login or deactivate logins. These functions may change ;)
- */
-
 function sendLoginRequest($username, $usersurname, $userlogin, $userpassword, $idprofile) {
     global $connection;
 
@@ -30,7 +24,7 @@ function listAllActiveUsers() {
     global $connection;
     $tableData = '';
 
-    $sqlQuery = "select * from ln_users, ln_userprofile where id_profile = id_userprofile and status_user = 'ATIVO';";
+    $sqlQuery = "select * from ln_users, ln_userprofile where id_profile = id_userprofile;";
     $resultset = mysqli_query($connection, $sqlQuery) or die("Error while processing data: " . mysqli_error());
     $rowCount = mysqli_num_rows($resultset);
 
@@ -50,6 +44,18 @@ function listAllActiveUsers() {
             $profilePath = $dataList['profile_path'];
             $navbarName = $dataList['navbar_name'];
 
+            if($statusUser == 'ATIVO') {
+                $btnOptionAccess = "<a class='dropdown-item' href='javascript:void(0)' onclick='deactivateUser(" . $idUsers . ");'>Desativar Usuário</a>";
+            } else {
+                $btnOptionAccess = "<a class='dropdown-item' href='javascript:void(0)' onclick='activateUser(" . $idUsers . ");'>Ativar Usuário</a>";
+            }
+
+            if($requestStatus == 'SOLICITADO') {
+                $btnUpdatePermissions = "<a class='dropdown-item' href='javascript:void(0)' onclick='authorizeUser(" . $idUsers . ");'>Autorizar Usuário</a>";
+            } else {
+                $btnUpdatePermissions = "<a class='dropdown-item' href='javascript:void(0)' onclick='unauthorizeUser(" . $idUsers . ");'>Desautorizar Usuário</a>";
+            }
+
             $tableLine = "
                 <tr>
                     <th scope='row'>". $idUsers ."</th>
@@ -59,7 +65,18 @@ function listAllActiveUsers() {
                     <td>" . $requestStatus . "</td>
                     <td>" . $statusUser . "</td>
                     <td>" . $descProfile . "</td>
-                    <td><a href='javascript:void(0)' class='btn btn-success' onclick='callDataModal(" . $idUsers . ");'>Detalhes</a></td>
+                    <td>
+                        <div class='btn-group'>
+                            <button type='button' class='btn btn-success dropdown-toggle' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                                Opções
+                            </button>
+                            <div class='dropdown-menu'>
+                                <a  class='dropdown-item' href='javascript:void(0)' onclick='callDataModal(" . $idUsers . ");'>Atualizar Dados</a>
+                                " . $btnOptionAccess . "
+                                " . $btnUpdatePermissions . " 
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             ";
 
@@ -72,9 +89,9 @@ function listAllActiveUsers() {
                             <th scope='col'>ID</th>
                             <th scope='col'>Nome</th>
                             <th scope='col'>Sobrenome</th>
-                            <th scope='col'>Login de Acesso</th>
-                            <th scope='col'>Status de Acesso</th>
-                            <th scope='col'>Status de Usuário</th>
+                            <th scope='col'>Login</th>
+                            <th scope='col'>Status Acesso</th>
+                            <th scope='col'>Status Usuário</th>
                             <th scope='col'>Perfil de Acesso</th>
                             <th scope='col'>Opções</th>
                         </tr>
