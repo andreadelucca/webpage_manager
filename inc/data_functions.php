@@ -1,6 +1,7 @@
 <?php
-
+session_start();
 include $_SERVER['DOCUMENT_ROOT'] . '/inc/config.php';
+$userLoggedin = $_SESSION['id_user'];
 
 function sendLoginRequest($username, $usersurname, $userlogin, $userpassword, $idprofile) {
     global $connection;
@@ -22,9 +23,16 @@ function newLoginUser($username, $usersurname, $userlogin, $userpassword, $idpro
 
 function listAllActiveUsers() {
     global $connection;
+    global $userLoggedin;
     $tableData = '';
 
-    $sqlQuery = "select * from ln_users, ln_userprofile where id_profile = id_userprofile;";
+    if(!$userLoggedin) {
+        $userLogged = "";
+    } else {
+        $userLogged = "AND id_users NOT IN ($userLoggedin)";
+    }
+
+    $sqlQuery = "select * from ln_users, ln_userprofile where id_profile = id_userprofile $userLogged;";
     $resultset = mysqli_query($connection, $sqlQuery) or die("Error while processing data: " . mysqli_error());
     $rowCount = mysqli_num_rows($resultset);
 
@@ -118,9 +126,7 @@ function listAllActiveUsers() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td colspan='8' align='center'>Nenhum dado a exibir</td>
-                        </tr>
+                        
                     </tbody>
                 </table>
         ";

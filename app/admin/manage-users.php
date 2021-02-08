@@ -64,7 +64,7 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
                     <h6>Preencha os campos para continuar. Para sair da janela, toque no ícone "x"</h6>
                     <br>
                     <form id="formUserDataUpdate">
-                        <input type="hidden" name="valueIduser">
+                        <input class="form-control" type="hidden" name="valueIduser" id="valueIduser">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="valueUsername">Nome *</label>
@@ -97,7 +97,7 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
                             <div class="form-group col-md-12">
                                 <label for="valueUserAccessProfile">Perfil de Acesso *</label>
                                 <select id="valueUserAccessProfile" class="form-control">
-                                    <option value="undefined" selected>Escolha um perfil</option>
+                                    <option value="0" selected>Escolha um perfil</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Usuário</option>
                                 </select>
@@ -187,13 +187,13 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
 
         const callDataModal = (idUser) => {
             $('#formDataUser').trigger("reset");
-            $('#valueIdUser').val(idUser);
 
             $('#modalUpdateUser').modal("show");
-            let runScript = '../../run/list_selected_user.php';
+            let runScript = '../../run/manage_updates_user.php';
             let form_data = new FormData();
 
             form_data.append('idUser', idUser);
+            form_data.append('message', 'LIST_USER');
 
             $.ajax({
                 url: runScript,
@@ -202,16 +202,18 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
                 contentType: false,
                 type: 'POST',
                 success: function (data) {
+                    console.log(data);
                     let contentData = JSON.parse(data);
-                    if(contentData.return_json === 1) {
-                        $('#valueIduser').val(contentData.idUser);
+                    if(contentData.return === 1) {
+                        $('#valueIduser').val(contentData.idusers);
                         $('#valueUsername').val(contentData.username);
                         $('#valueUsersurname').val(contentData.usersurname);
                         $('#valueUserlogin').val(contentData.userlogin);
                         $('#valueUserpass').val(contentData.userpass);
-                        $('#valueUserAccessprofile').val(contentData.useraccessprofile);
+                        $('#valueUserpass2').val(contentData.userpass);
+                        $('#valueUserAccessProfile').val(contentData.iduserprofile);
                     } else {
-                        $('#div_message_return').html(contentData.message);
+                        $('#div_message_return').html(contentData.messageError);
                     }
                 }
             })
@@ -290,22 +292,25 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
         }
 
         const updateUserInfo = () => {
+            let userid = $('#valueIduser').val();
             let username = $('#valueUsername').val();
             let usersurname = $('#valueUsersurname').val();
             let userlogin = $('#valueUserlogin').val();
-            let userpassword = $('#valueUserpass').val();
-            let userpassword2 = $('#valueUserpass2').val();
-            let useraccessprofile = $('#valueUserAccessprofile').val();
+            let userpassword = btoa($('#valueUserpass').val());
+            let userpassword2 = btoa($('#valueUserpass2').val());
+            let useraccessprofile = $('#valueUserAccessProfile').val();
 
-            let processFile = '../../run/update_user_data.php';
+            let processFile = '../../run/manage_updates_user.php';
 
             let form_data = new FormData();
+            form_data.append('userid', userid);
             form_data.append('username', username);
             form_data.append('usersurname', usersurname);
             form_data.append('userlogin', userlogin);
             form_data.append('userpassword', userpassword);
             form_data.append('userpassword2', userpassword2);
             form_data.append('useraccessprofile', useraccessprofile);
+            form_data.append('message', 'SAVE_USER');
 
             $.ajax({
                 url: processFile,

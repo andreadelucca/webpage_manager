@@ -29,10 +29,11 @@ if (!$userlogin) {
         $sqlQuery = "    
             select * from ln_users, ln_userprofile
             where id_profile = id_userprofile 
-            and status_user = 'INATIVO' 
+            and request_status = 'APROVADO'
+            and status_user = 'ATIVO'
             and user_login = '$userlogin'
         ";
-        $resultset = mysqli_query($connection, $sqlQuery) or die("Erro ao realizar requisição do banco de dados: " . mysqli_error($connection));
+        $resultset = mysqli_query($connection, $sqlQuery) or die("Erro ao realizar requisição do banco de dados: " . $sqlQuery . " / " . mysqli_error($connection));
         $returnQuery = mysqli_num_rows($resultset);
         if($returnQuery == 0) {
             $error++;
@@ -83,5 +84,6 @@ $returnJSON['message']      = $message;
 $returnJSON['homepath']     = $home_path;
 $returnJSON['navbarName']   = $navbar_name;
 $returnJSON['url']          = 'app/'. $profile_path . '/' . $home_path;
+$returnJSON['sql'] = $sqlQuery;
 
 echo $requestReturn = json_encode($returnJSON);
