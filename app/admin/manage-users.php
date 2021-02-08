@@ -61,9 +61,12 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
                     </button>
                 </div>
                 <div class="modal-body">
-                    <h6>Preencha os campos para continuar. Para sair da janela, toque no ícone "x"</h6>
+                    <h6>Preencha os campos para continuar. Para sair da janela, toque no ícone "x".</h6>
                     <br>
                     <form id="formUserDataUpdate">
+                        <div id="div_message_return">
+
+                        </div>
                         <input class="form-control" type="hidden" name="valueIduser" id="valueIduser">
                         <div class="form-row">
                             <div class="form-group col-md-6">
@@ -110,9 +113,6 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
                             <button type="button" class="btn btn-warning" id="buttonClearForm" onclick="resetFormulary();">Limpar Formulário</button>
                         </div>
                     </form>
-                </div>
-                <div class="div_message_return">
-
                 </div>
             </div>
         </div>
@@ -322,10 +322,12 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
                     console.log(data);
                     let values = JSON.parse(data);
                     if (values.return === 1) {
-                        $('#div_message_return').html(values.message);
-                        location.reload();
+                        $('#div_message_return').html(values.messageSuccess);
+                        setTimeout(function(){
+                            location.reload();
+                        }, 4000);
                     } else {
-                        $('#div_message_return').html(values.message);
+                        $('#div_message_return').html(values.messageError);
                     }
                 }
             });

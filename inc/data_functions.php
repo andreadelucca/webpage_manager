@@ -32,7 +32,7 @@ function listAllActiveUsers() {
         $userLogged = "AND id_users NOT IN ($userLoggedin)";
     }
 
-    $sqlQuery = "select * from ln_users, ln_userprofile where id_profile = id_userprofile $userLogged;";
+    $sqlQuery = "select * from ln_users, ln_userprofile where id_profile = id_userprofile $userLogged AND user_login != 'admin';";
     $resultset = mysqli_query($connection, $sqlQuery) or die("Error while processing data: " . mysqli_error());
     $rowCount = mysqli_num_rows($resultset);
 
