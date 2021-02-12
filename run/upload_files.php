@@ -12,11 +12,11 @@ $imageTitle = $_POST['imageTitle'];
 $imageSubtitle = $_POST['imageSubtitle'];
 $errors = 0;
 
-if(strlen($imageTitle) <= 0) {
+if(strlen(trim($imageTitle)) <= 0) {
     $errors++;
     $returnJSON['messageSuccess'] = '';
     $returnJSON['messageError'] = style_short_alerts('danger', 'Erro ao salvar dados!', 'Título da imagem não pode estar vazio');
-} else if (strlen($imageSubtitle) <= 0) {
+} else if (strlen(trim($imageSubtitle)) <= 0) {
     $errors++;
     $returnJSON['messageSuccess'] = '';
     $returnJSON['messageError'] = style_short_alerts('danger', 'Erro ao salvar dados!', 'Subtítulo da imagem não pode estar vazio');

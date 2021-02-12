@@ -125,7 +125,6 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
             processData: false,
             type: 'POST',
             success: function(data) {
-                console.log(data);
                 let dataReturn = JSON.parse(data);
                 if(dataReturn.return === 1) {
                     $("#message-error-success").html(dataReturn.messageSuccess);
@@ -143,7 +142,7 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
     }
 
     const resetForm = () => {
-        document.getElementById("newuser-form").reset();
+        document.getElementById("newupload-form").reset();
     }
 
 </script>
