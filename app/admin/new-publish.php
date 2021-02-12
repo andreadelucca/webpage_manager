@@ -55,8 +55,8 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
 
         <div class="col-md-5">
             <div class="jumbotron">
-                <h1 class="display-4">Novo Upload</h1>
-                <p class="lead text-justify">Preencha adequadamente todos os campos, conforme se pede. </p>
+                <h1 class="display-4">Nova Publicação</h1>
+                <p class="lead text-justify">Preencha adequadamente todos os campos, conforme se pede. Todas as imagens aqui publicadas estarão disponíveis na galeria, no site principal</p>
                 <hr class="my-4">
                 <p class="text-justify">Os campos com * são de caráter obrigatório</p>
             </div>
@@ -70,11 +70,11 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
             <form id="newupload-form" action="" method="post" enctype="multipart/form-data">
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label for="imageTitle">Título do Post *</label>
+                        <label for="imageTitle">Título da Imagem *</label>
                         <input type="text" class="form-control" id="txtImageTitle" name="txtImageTitle">
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="imageSubtitle">Subtítulo do Post *</label>
+                        <label for="imageSubtitle">Subtítulo da Imagem *</label>
                         <textarea name="txtImageSubtitle" id="txtImageSubtitle" rows="5" class="form-control" style="resize: none;"></textarea>
                     </div>
                 </div>

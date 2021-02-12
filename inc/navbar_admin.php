@@ -19,7 +19,7 @@
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown_public" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publicações</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown10">
                     <a class="dropdown-item" href="new-publish.php">Realizar Publicação</a>
-                    <a class="dropdown-item" href="#">Analisar Publicações Realizadas</a>
+                    <a class="dropdown-item" href="manage-publishes.php">Analisar Publicações Realizadas</a>
                 </div>
             </li>
             <li class="nav-item li-spaces">
