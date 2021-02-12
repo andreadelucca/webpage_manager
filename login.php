@@ -39,12 +39,13 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-12 d-flex justify-content-center">
-                <div class="mb-3">
-                    <a href="request_login.php" style="font-size: small;">Não tem login? Solicite acesso aqui</a>
+                <div class="mb-3" style="font-size: small;">
+                    <a href="request_login.php">Não tem login? Solicite acesso aqui</a>
                 </div>
             </div>
             <div class="form-group col-md-12 d-flex justify-content-center">
-                <button type="button" id="sendLoginData" class="btn btn-success" onclick="validateUser();">Acessar</button>
+                <button type="button" id="sendLoginData" class="btn btn-success" onclick="validateUser();">Acessar</button>&nbsp;
+                <button type="button" id="returnMainPage" class="btn btn-warning" onclick="location.href = 'main/index.php';">Voltar para o Início</button>
             </div>
         </div>
     </form>
