@@ -6,7 +6,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/inc/main_functions.php";
 global $connection;
 
 $userlogin    = $_POST['username'];
-$userpassword = $_POST['userpassword'];
+$userpassword = base64_decode($_POST['userpassword']);
 $return       = 0;
 $error        = 0;
 $message      = '';

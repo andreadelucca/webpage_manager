@@ -62,7 +62,7 @@
 <script>
     const validateUser = () => {
         let username = $('#user_name').val();
-        let userpassword = $('#user_password').val();
+        let userpassword = btoa($('#user_password').val());
 
         $.post('run/validate_user.php', {
            username: username,
@@ -73,7 +73,9 @@
             if(data.return_json == 1) {
                 let url = data.url;
                 $('#login_success_error').html(data.message);
-                location.replace(url);
+                setTimeout(function(){
+                    location.replace(url)
+                }, 4000);
             } else {
                 $('#login_success_error').html(data.message);
             }
