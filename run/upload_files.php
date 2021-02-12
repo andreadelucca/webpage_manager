@@ -46,7 +46,7 @@ if($errors == 0) {
             $filepath = $filepath.strtolower($finalImage);
             if(move_uploaded_file($tempImage, $filepath)) {
 
-                $sqlQuery = "INSERT INTO ln_gallery VALUES (null, '$imageTitle', '$imageSubtitle', '$filepath', $idUser);";
+                $sqlQuery = "INSERT INTO ln_gallery VALUES (null, '$imageTitle', '$imageSubtitle', '$filepath','PENDING_APPROVAL', $idUser);";
                 $resultset = mysqli_query($connection, $sqlQuery) or die('Error while saving data: ' . mysqli_error($connection));
                 $numRows = mysqli_affected_rows($connection);
 
