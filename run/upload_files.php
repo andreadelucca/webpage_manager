@@ -38,7 +38,7 @@ $tempImage = $_FILES['imageFile']['tmp_name'];
 $extensionImage = strtolower(pathinfo($imageFile, PATHINFO_EXTENSION));
 
 # To avoid same files - Give an random name for image
-$finalImage = rand(1000,1000000).$imageFile;
+$finalImage = rand(1000,10000000).basename($imageFile);
 
 if($errors == 0) {
     if($imageFile) {
