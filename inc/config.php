@@ -5,6 +5,7 @@
     set_time_limit(0);
     ini_set('post_max_size', '600M');
     ini_set('upload_max_filesize', '600M');
+    ini_set('file_uploads', 'On');
 
     if(DEBUG == true) {
         ini_set('display_errors', 'On');

@@ -18,7 +18,7 @@
             <li class="nav-item li-spaces dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown_public" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Publicações</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown10">
-                    <a class="dropdown-item" href="#">Realizar Publicação</a>
+                    <a class="dropdown-item" href="new-publish.php">Realizar Publicação</a>
                     <a class="dropdown-item" href="#">Analisar Publicações Realizadas</a>
                 </div>
             </li>
@@ -26,8 +26,18 @@
                 <a class="nav-link" href="#">Alterar Minha Senha</a>
             </li>
             <li class="nav-item li-spaces">
-                <a class="nav-link" href="logout.php">Sair (Logado como <?php echo $_SESSION['user_name']; ?> )</a>
+                <a class="nav-link" href="logout.php">Sair do Sistema</a>
             </li>
         </ul>
     </div>
 </nav>
+<br>
+<div class="container-fluid">
+    <div class="d-flex justify-content-center">
+        <h6>
+            <i>
+                Logado como <?php echo $_SESSION['user_name']; ?>
+            </i>
+        </h6>
+    </div>
+</div>
