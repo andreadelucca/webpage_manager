@@ -23,7 +23,7 @@
                 </div>
             </li>
             <li class="nav-item li-spaces">
-                <a class="nav-link" href="#">Alterar Minha Senha</a>
+                <a class="nav-link disabled" href="#">Alterar Minha Senha</a>
             </li>
             <li class="nav-item li-spaces">
                 <a class="nav-link" href="logout.php">Sair do Sistema</a>

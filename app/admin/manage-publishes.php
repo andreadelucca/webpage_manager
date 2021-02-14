@@ -50,7 +50,10 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
 </head>
 <body class="font-structure">
 
-<?php include "../../inc/" . $navbarSystem; ?>
+<?php
+    include "../../inc/" . $navbarSystem;
+    include "../../inc/publish_modals.php";
+?>
 <br>
 
 <div class="container">
@@ -117,7 +120,7 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
     // -------------------------------------- JavaScript Main Functions --------------------------------------------
 
     const approvePublish = (idGallery) => {
-        let processURL = '../../manage_gallery.php';
+        let processURL = '../../run/manage_gallery.php';
 
         let formData = new FormData();
         formData.append('idGallery', idGallery);
@@ -130,7 +133,6 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
             contentType: false,
             type: 'POST',
             success: function (data) {
-                console.log(data);
                 let returnJSON = JSON.parse(data);
                 if(returnJSON.return === 1) {
                     $('#message-management-publishes').html(returnJSON.messageSuccess);
@@ -145,7 +147,7 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
     }
 
     const sendToEditPublish = (idGallery) => {
-        let processURL = '../../manage_gallery.php';
+        let processURL = '../../run/manage_gallery.php';
 
         let formData = new FormData();
         formData.append('idGallery', idGallery);
@@ -158,7 +160,6 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
             contentType: false,
             type: 'POST',
             success: function (data) {
-                console.log(data);
                 let returnJSON = JSON.parse(data);
                 if(returnJSON.return === 1) {
                     $('#message-management-publishes').html(returnJSON.messageSuccess);
@@ -173,7 +174,7 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
     }
 
     const removePublish = (idGallery) => {
-        let processURL = '../../manage_gallery.php';
+        let processURL = '../../run/manage_gallery.php';
 
         let formData = new FormData();
         formData.append('idGallery', idGallery);
@@ -200,24 +201,101 @@ if ((!isset($_SESSION['user_login']) == true) && (!isset($_SESSION['desc_profile
         });
     }
 
-    // -------------------------------------- Pending Editions for Saturday ----------------------------------------
-
     const callEditPublish = (idGallery) => {
+        $('#modalEditPublish').modal("show");
+        let processEditData = '../../run/manage_gallery.php';
 
+        let formData = new FormData();
+        formData.append('idGallery', idGallery);
+        formData.append('message', 'EDIT');
+        $.ajax({
+            url: processEditData,
+            data: formData,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                let form_data = JSON.parse(data);
+                if(form_data.returnJSON === 1) {
+                    $('#txtEditImageId').val(form_data.imageId);
+                    $('#txtEditImageTitle').val(form_data.imageTitle);
+                    $('#txtEditImageSubtitle').val(form_data.imageSubtitle);
+                } else {
+                    $('#message-management-publishes').html(form_data.messageError);
+                }
+            }
+        });
     }
 
     const visualizePublish = (idGallery) => {
+        $('#modalVisualizePublish').modal("show");
+        let processEditData = '../../run/manage_gallery.php';
 
+        let formData = new FormData();
+        formData.append('idGallery', idGallery);
+        formData.append('message', 'VISUALIZE');
+        $.ajax({
+            url: processEditData,
+            data: formData,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                let form_data = JSON.parse(data);
+                if(form_data.returnJSON === 1) {
+                    $('#txtVisualizeImageTitle').val(form_data.imageTitle);
+                    $('#txtVisualizeImageSubtitle').val(form_data.imageSubtitle);
+                    $('#txtVisualizeImageFile').attr("src", "../" + form_data.imageFile);
+                } else {
+                    $('#message-management-publishes').html(form_data.messageError);
+                }
+            }
+        });
     }
 
     const saveGalleryEdit = () => {
+        let idGallery = $('#txtEditImageId').val();
+        let imageTitle = $('#txtEditImageTitle').val();
+        let imageSubtitle = $('#txtEditImageSubtitle').val();
+        let imageFile = $('#txtEditImageFile')[0].files;
 
+        let processFile = '../../run/manage_gallery.php';
+        let formData = new FormData();
+
+        formData.append('idGallery', idGallery);
+        formData.append('imageTitle', imageTitle);
+        formData.append('imageSubtitle', imageSubtitle);
+        formData.append('imageFile', imageFile[0]);
+        formData.append('message', 'SAVE_EDIT');
+
+        $.ajax({
+            url: processFile,
+            data: formData,
+            contentType: false,
+            processData: false,
+            type: 'POST',
+            success: function(data) {
+                console.log(data);
+                let dataReturn = JSON.parse(data);
+                if(dataReturn.return === 1) {
+                    $("#message-error-success").html(dataReturn.messageSuccess);
+                    setTimeout(function(){
+                        location.reload();
+                    }, 4000);
+                } else {
+                    $('#message-error-success').html(dataReturn.messageError);
+                }
+            },
+            error: function (data) {
+                console.log('Error: ' + data);
+            }
+        })
     }
 
     // -------------------------------------------------------------------------------------------------------------
 
     const resetFormulary = () => {
-        document.getElementById("formUserDataUpdate").reset();
+        document.getElementById("newuploadedit-form").reset();
     }
 
 </script>

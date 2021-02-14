@@ -188,8 +188,9 @@ function listAllActivePublishes(){
             } else if ($imageStatus == 'TO_EDIT') {
                 $showTranslate = 'Para Edição';
                 $btnOptionAccess = '
+                    <a class="dropdown-item" href="javascript:void(0)" onclick="visualizePublish(' . $idGallery . ');">Visualizar Publicação</a>
                     <a class="dropdown-item" href="javascript:void(0)" onclick="callEditPublish(' . $idGallery . ');">Editar Publicação</a>
-                    <a class="dropdown-item" href="javascript:void(0)" onclick="removePublish(' . $idGallery . ');">Remover Publicação</a>
+                    <a class="dropdown-item disabled" href="javascript:void(0)" onclick="removePublish(' . $idGallery . ');">Remover Publicação (Em breve)</a>
                 ';
             }
 
