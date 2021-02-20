@@ -17,9 +17,10 @@
 
     # ------------------------------------------------ End of configs --------------------------------------------------
 
-    include $_SERVER['DOCUMENT_ROOT'] . "/inc/config.php";
+    include "../../inc/config.php";
     global $pageTitle;
     global $githubLink;
+    global $navbarSystem;
 
     session_start();
 

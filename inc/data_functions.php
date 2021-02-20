@@ -1,6 +1,6 @@
 <?php
 session_start();
-include $_SERVER['DOCUMENT_ROOT'] . '/inc/config.php';
+include '../inc/config.php';
 $userLoggedin = $_SESSION['id_user'];
 
 function sendLoginRequest($username, $usersurname, $userlogin, $userpassword, $idprofile) {

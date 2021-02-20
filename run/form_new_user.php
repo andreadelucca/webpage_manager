@@ -1,8 +1,8 @@
 <?php
 
     //include $_SERVER['DOCUMENT_ROOT'] . '/inc/config.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/inc/main_functions.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/inc/data_functions.php';
+    include '../inc/main_functions.php';
+    include '../inc/data_functions.php';
 
     # Variables for Data Controlling
     $errors = 0;

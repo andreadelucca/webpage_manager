@@ -1,7 +1,7 @@
 <?php
 
-include $_SERVER['DOCUMENT_ROOT'] . "/inc/config.php";
-include $_SERVER['DOCUMENT_ROOT'] . "/inc/main_functions.php";
+include "../inc/config.php";
+include "../inc/main_functions.php";
 
 global $connection;
 

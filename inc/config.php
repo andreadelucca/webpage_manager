@@ -1,6 +1,7 @@
 <?php
 
-    define('DEBUG', false);
+    //define('DEBUG', false);
+    define('DEBUG', true);
 
     set_time_limit(0);
     ini_set('post_max_size', '600M');
@@ -20,7 +21,7 @@
     $appTitle = 'Webpage Manager v1';
     $databaseHost = 'localhost';
     $databaseUser = 'root';
-    $databasePass = '0000';
+    $databasePass = '';
     $databaseName = 'ln_website';
     $databasePort = 3307;
     $githubLink = "https://github.com/andreadelucca/webpage_manager";

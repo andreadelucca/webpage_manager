@@ -17,10 +17,11 @@ date_default_timezone_set('America/Manaus');
 
 # ------------------------------------------------ End of configs --------------------------------------------------
 
-include $_SERVER['DOCUMENT_ROOT'] . "/inc/config.php";
-include $_SERVER['DOCUMENT_ROOT'] . "/inc/data_functions.php";
+include "../../inc/config.php";
+include "../../inc/data_functions.php";
 global $pageTitle;
 global $githubLink;
+global $navbarSystem;
 
 session_start();
 
